@@ -1,44 +1,36 @@
 # LISTA ENLAZADA SIMPLE: cada nodo representa un libro.
-# NodoLibro solamente construye los nodos; las operaciones son funciones.
+# Los nodos son listas de Python; las operaciones son funciones.
 from entradas import leer_texto, leer_entero
 
-class NodoLibro:
-    def __init__(self, codigo, titulo, autor, propietario, universidad,
-                 modalidad, precio, carrera="Sin especificar"):
-        self.codigo = codigo
-        self.titulo = titulo
-        self.autor = autor
-        self.propietario = propietario
-        self.universidad = universidad
-        self.carrera = carrera
-        self.modalidad = modalidad
-        self.precio = precio
-        self.estado = "Disponible"
-        self.destinatario = ""
-        self.universidad_destinatario = ""
-        self.codigo_intercambio = 0
-        self.prestado_a = ""
-        self.universidad_prestatario = ""
-        self.cola = []
-        self.siguiente = None
+# Cada nodo es una lista con estas posiciones:
+# 0 código, 1 título, 2 autor, 3 propietario, 4 universidad,
+# 5 modalidad, 6 precio, 7 prestatario, 8 universidad del prestatario,
+# 9 carrera, 10 estado, 11 destinatario, 12 universidad del destinatario,
+# 13 código del libro intercambiado, 14 cola, 15 enlace al siguiente nodo.
+# La cabeza apunta al primer nodo; None indica el final.
+# IMPORTANTE: nodo[15] guarda el siguiente nodo, no su código.
+def crear_nodo(codigo, titulo, autor, propietario, universidad,
+               modalidad, precio, carrera="Sin especificar"):
+    return [codigo, titulo, autor, propietario, universidad,
+            modalidad, precio, "", "", carrera, "Disponible", "", "", 0, [], None]
 
 
 def agregar_libro(cabeza, nuevo):
     if cabeza is None:
         return nuevo
     actual = cabeza
-    while actual.siguiente is not None:
-        actual = actual.siguiente
-    actual.siguiente = nuevo
+    while actual[15] is not None:
+        actual = actual[15]
+    actual[15] = nuevo
     return cabeza
 
 
 def buscar_codigo(cabeza, codigo):
     actual = cabeza
     while actual is not None:
-        if actual.codigo == codigo:
+        if actual[0] == codigo:
             return actual
-        actual = actual.siguiente
+        actual = actual[15]
     return None
 
 
@@ -46,13 +38,13 @@ def quitar_libro(cabeza, codigo):
     anterior = None
     actual = cabeza
     while actual is not None:
-        if actual.codigo == codigo:
+        if actual[0] == codigo:
             if anterior is None:
-                return actual.siguiente
-            anterior.siguiente = actual.siguiente
+                return actual[15]
+            anterior[15] = actual[15]
             return cabeza
         anterior = actual
-        actual = actual.siguiente
+        actual = actual[15]
     return cabeza
 
 
@@ -69,7 +61,7 @@ def publicar_libro(cabeza, modalidad):
     precio = 0
     if modalidad == "Venta":
         precio = leer_entero("Precio en córdobas enteros: ")
-    nuevo = NodoLibro(codigo, titulo, autor, propietario, universidad,
+    nuevo = crear_nodo(codigo, titulo, autor, propietario, universidad,
                       modalidad, precio, carrera)
     cabeza = agregar_libro(cabeza, nuevo)
     print("Libro publicado.")
@@ -78,25 +70,25 @@ def publicar_libro(cabeza, modalidad):
 
 def mostrar_libro(libro):
     print("----------------------------------------")
-    print("Código:", libro.codigo, "| Título:", libro.titulo)
-    print("Autor:", libro.autor)
-    print("Publicado por:", libro.propietario)
-    print("Universidad:", libro.universidad)
-    print("Carrera:", libro.carrera)
-    print("Modalidad:", libro.modalidad)
-    if libro.modalidad == "Venta":
-        print("Precio: C$", libro.precio)
-    if libro.estado == "Vendido":
+    print("Código:", libro[0], "| Título:", libro[1])
+    print("Autor:", libro[2])
+    print("Publicado por:", libro[3])
+    print("Universidad:", libro[4])
+    print("Carrera:", libro[9])
+    print("Modalidad:", libro[5])
+    if libro[5] == "Venta":
+        print("Precio: C$", libro[6])
+    if libro[10] == "Vendido":
         print("Estado: Vendido")
-        print("Comprador:", libro.destinatario, "| Universidad:", libro.universidad_destinatario)
-    elif libro.estado == "Intercambiado":
-        print("Estado: Intercambiado por el libro", libro.codigo_intercambio)
-        print("Entregado a:", libro.destinatario, "| Universidad:", libro.universidad_destinatario)
-    elif libro.prestado_a == "":
+        print("Comprador:", libro[11], "| Universidad:", libro[12])
+    elif libro[10] == "Intercambiado":
+        print("Estado: Intercambiado por el libro", libro[13])
+        print("Entregado a:", libro[11], "| Universidad:", libro[12])
+    elif libro[7] == "":
         print("Estado: Disponible")
     else:
-        print("Prestado a:", libro.prestado_a,
-              "| Universidad:", libro.universidad_prestatario)
+        print("Prestado a:", libro[7],
+              "| Universidad:", libro[8])
 
 
 def mostrar_catalogo(cabeza):
@@ -105,7 +97,7 @@ def mostrar_catalogo(cabeza):
     actual = cabeza
     while actual is not None:
         mostrar_libro(actual)
-        actual = actual.siguiente
+        actual = actual[15]
 
 
 def buscar_libros(cabeza):
@@ -113,12 +105,12 @@ def buscar_libros(cabeza):
     actual = cabeza
     encontrados = 0
     while actual is not None:
-        if (texto in actual.titulo.lower() or texto in actual.autor.lower()
-                or texto in actual.universidad.lower()
-                or texto in actual.carrera.lower()):
+        if (texto in actual[1].lower() or texto in actual[2].lower()
+                or texto in actual[4].lower()
+                or texto in actual[9].lower()):
             mostrar_libro(actual)
             encontrados += 1
-        actual = actual.siguiente
+        actual = actual[15]
     if encontrados == 0:
         print("No se encontraron libros.")
 
@@ -128,7 +120,7 @@ def eliminar_publicacion(cabeza):
     libro = buscar_codigo(cabeza, codigo)
     if libro is None:
         print("No existe ese libro.")
-    elif libro.prestado_a != "" or len(libro.cola) > 0:
+    elif libro[7] != "" or len(libro[14]) > 0:
         print("No puede eliminar un libro prestado o con solicitudes pendientes.")
     else:
         cabeza = quitar_libro(cabeza, codigo)

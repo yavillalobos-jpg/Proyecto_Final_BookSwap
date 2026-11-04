@@ -1,3 +1,4 @@
+# Las posiciones de cada nodo están explicadas en catalogo.py.
 # COLAS FIFO: primero en entrar, primero en salir.
 # append agrega al final; pop(0) retira al primero.
 from catalogo import buscar_codigo
@@ -9,40 +10,40 @@ def solicitar_prestamo(cabeza):
     if libro is None:
         print("No existe ese libro.")
         return
-    if libro.modalidad != "Préstamo":
+    if libro[5] != "Préstamo":
         print("Este libro no está publicado para préstamo.")
         return
     nombre = leer_texto("Nombre del solicitante: ")
     universidad = leer_texto("Universidad del solicitante: ")
-    if (nombre.lower() == libro.propietario.lower()
-            and universidad.lower() == libro.universidad.lower()):
+    if (nombre.lower() == libro[3].lower()
+            and universidad.lower() == libro[4].lower()):
         print("El propietario no puede solicitar su propio libro.")
         return
-    if (nombre.lower() == libro.prestado_a.lower()
-            and universidad.lower() == libro.universidad_prestatario.lower()):
+    if (nombre.lower() == libro[7].lower()
+            and universidad.lower() == libro[8].lower()):
         print("Esa persona ya tiene prestado el libro.")
         return
-    for solicitud in libro.cola:
+    for solicitud in libro[14]:
         if (solicitud[0].lower() == nombre.lower()
                 and solicitud[1].lower() == universidad.lower()):
             print("Esa persona ya está en la cola.")
             return
-    libro.cola.append([nombre, universidad])
-    print("Solicitud registrada. Posición en la cola:", len(libro.cola))
+    libro[14].append([nombre, universidad])
+    print("Solicitud registrada. Posición en la cola:", len(libro[14]))
 
 
 def ver_solicitudes(cabeza):
     actual = cabeza
     cantidad = 0
     while actual is not None:
-        if len(actual.cola) > 0:
-            print("Libro:", actual.titulo, "| Código:", actual.codigo)
+        if len(actual[14]) > 0:
+            print("Libro:", actual[1], "| Código:", actual[0])
             posicion = 1
-            for solicitud in actual.cola:
+            for solicitud in actual[14]:
                 print(posicion, "-", solicitud[0], "|", solicitud[1])
                 posicion += 1
                 cantidad += 1
-        actual = actual.siguiente
+        actual = actual[15]
     if cantidad == 0:
         print("No hay solicitudes pendientes.")
 
@@ -52,17 +53,17 @@ def atender_prestamo(cabeza):
     libro = buscar_codigo(cabeza, codigo)
     if libro is None:
         print("No existe ese libro.")
-    elif libro.modalidad != "Préstamo":
+    elif libro[5] != "Préstamo":
         print("Este libro no está publicado para préstamo.")
-    elif libro.prestado_a != "":
+    elif libro[7] != "":
         print("Primero debe registrarse la devolución del libro.")
-    elif len(libro.cola) == 0:
+    elif len(libro[14]) == 0:
         print("No hay solicitudes para ese libro.")
     else:
-        solicitud = libro.cola.pop(0)
-        libro.prestado_a = solicitud[0]
-        libro.universidad_prestatario = solicitud[1]
-        print("Libro prestado a:", libro.prestado_a)
+        solicitud = libro[14].pop(0)
+        libro[7] = solicitud[0]
+        libro[8] = solicitud[1]
+        print("Libro prestado a:", libro[7])
 
 
 def devolver_libro(cabeza):
@@ -70,9 +71,9 @@ def devolver_libro(cabeza):
     libro = buscar_codigo(cabeza, codigo)
     if libro is None:
         print("No existe ese libro.")
-    elif libro.prestado_a == "":
+    elif libro[7] == "":
         print("Ese libro no está prestado.")
     else:
-        libro.prestado_a = ""
-        libro.universidad_prestatario = ""
+        libro[7] = ""
+        libro[8] = ""
         print("Devolución registrada. Ya puede atender la siguiente solicitud.")
