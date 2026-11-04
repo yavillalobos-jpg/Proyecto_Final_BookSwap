@@ -3,7 +3,7 @@ BOOKSWAP - CATÁLOGO DE DEMOSTRACIÓN
 1. Extraiga todo el ZIP en una carpeta.
 2. Abra esa carpeta en VS Code.
 3. En la terminal de esa carpeta ejecute: python main.py
-4. Use la opción 2 para mostrar los libros y la opción 3 para buscar.
+4. Use la opción 4 para mostrar los libros y la opción 5 para buscar.
 
 Todos los registros son ficticios: títulos de demostración, autores,
 propietarios, precios y asociaciones con universidades. No son inventarios
@@ -11,8 +11,23 @@ oficiales ni una verificación de las carreras ofrecidas por cada universidad.
 
 Los códigos identifican publicaciones y no se pueden repetir.
 Para publicar otro libro, use un código libre (por ejemplo, 1201).
-La opción 1 publica un libro NUEVO; los ejemplos ya están registrados.
-La opción 4 solicita un libro cuya modalidad sea Préstamo.
+Las opciones 1, 2 y 3 publican libros NUEVOS para venta, intercambio y préstamo.
+Los ejemplos ya están registrados.
+La opción 6 compra un libro: pide comprador, universidad y confirmación.
+El libro queda Vendido y no puede comprarse otra vez.
+La opción 7 intercambia dos libros publicados para intercambio, de propietarios
+que sean diferentes. Pide confirmación de que ambos aceptaron. Registra
+los destinatarios y cierra ambas publicaciones como Intercambiado.
+Estas operaciones simulan acuerdos; no cobran dinero ni envían mensajes.
+La opción 8 solicita préstamo; la 9 muestra la cola; la 10 atiende al primero.
+La opción 11 registra devoluciones, la 12 elimina y la 13 guarda y sale.
+Los estados de ventas e intercambios se conservan al reiniciar.
+
+PRUEBA RÁPIDA CON EL CATÁLOGO INICIAL
+Compra: opción 6, código 102, nombre y universidad del comprador, confirmar s.
+Intercambio: opción 7, códigos 103 y 203, confirmar s.
+Préstamo: opción 8, código 101, nombre y universidad; opción 10, código 101.
+Ver resultados: opción 4. Guardar y salir: opción 13.
 
 libros_ejemplo.txt solo se lee cuando no existe libros.txt.
 Al guardar, se crean libros.txt y solicitudes.txt con los datos actuales.
@@ -26,6 +41,7 @@ catalogo.py: lista enlazada de libros, publicación y búsqueda.
 prestamos.py: cola FIFO y devoluciones.
 archivos.py: lectura y guardado en texto.
 entradas.py: lectura y validación de cadenas y números.
+operaciones.py: compra, venta resultante e intercambio entre dos publicaciones.
 
 CATÁLOGO (código | título | carrera | universidad | modalidad)
 101 | Fundamentos de programación | Ingeniería en Sistemas | UAM | Préstamo

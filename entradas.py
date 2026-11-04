@@ -19,4 +19,3 @@ def leer_entero(mensaje):
         except ValueError:
             pass
         print("Escriba un número entero mayor que cero.")
-

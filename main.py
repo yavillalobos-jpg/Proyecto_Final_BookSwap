@@ -3,6 +3,7 @@
 from catalogo import publicar_libro, mostrar_catalogo, buscar_libros, eliminar_publicacion
 from prestamos import solicitar_prestamo, ver_solicitudes, atender_prestamo, devolver_libro
 from archivos import guardar_datos, cargar_datos
+from operaciones import comprar_libro, intercambiar_libros
 
 def main():
     try:
@@ -12,47 +13,58 @@ def main():
         return
     while True:
         print("\n========== BOOKSWAP ==========")
-        print("1. Publicar un libro")
-        print("2. Mostrar catálogo")
-        print("3. Buscar libros")
-        print("4. Solicitar préstamo")
-        print("5. Ver solicitudes pendientes")
-        print("6. Atender siguiente solicitud de préstamo")
-        print("7. Registrar devolución")
-        print("8. Eliminar publicación")
-        print("9. Guardar y salir")
+        print("1. Vender: publicar un libro en venta")
+        print("2. Publicar un libro para intercambio")
+        print("3. Publicar un libro para préstamo")
+        print("4. Mostrar catálogo")
+        print("5. Buscar libros")
+        print("6. Comprar un libro")
+        print("7. Intercambiar libros")
+        print("8. Solicitar préstamo")
+        print("9. Ver solicitudes de préstamo pendientes")
+        print("10. Atender siguiente solicitud de préstamo")
+        print("11. Registrar devolución")
+        print("12. Eliminar publicación")
+        print("13. Guardar y salir")
         opcion = input("Seleccione una opción: ").strip()
         if opcion == "1":
-            cabeza = publicar_libro(cabeza)
+            cabeza = publicar_libro(cabeza, "Venta")
         elif opcion == "2":
-            mostrar_catalogo(cabeza)
+            cabeza = publicar_libro(cabeza, "Intercambio")
         elif opcion == "3":
-            buscar_libros(cabeza)
+            cabeza = publicar_libro(cabeza, "Préstamo")
         elif opcion == "4":
-            solicitar_prestamo(cabeza)
+            mostrar_catalogo(cabeza)
         elif opcion == "5":
-            ver_solicitudes(cabeza)
+            buscar_libros(cabeza)
         elif opcion == "6":
-            atender_prestamo(cabeza)
+            comprar_libro(cabeza)
         elif opcion == "7":
-            devolver_libro(cabeza)
+            intercambiar_libros(cabeza)
         elif opcion == "8":
+            solicitar_prestamo(cabeza)
+        elif opcion == "9":
+            ver_solicitudes(cabeza)
+        elif opcion == "10":
+            atender_prestamo(cabeza)
+        elif opcion == "11":
+            devolver_libro(cabeza)
+        elif opcion == "12":
             cabeza = eliminar_publicacion(cabeza)
-        elif opcion != "9":
+        elif opcion != "13":
             print("Opción incorrecta.")
             continue
         # Guardamos después de cada cambio y antes de salir.
-        if opcion in ["1", "4", "6", "7", "8", "9"]:
+        if opcion in ["1", "2", "3", "6", "7", "8", "10", "11", "12", "13"]:
             try:
                 guardar_datos(cabeza)
             except OSError:
-                print("No se pudo guardar. Revise los permisos e intente la opción 9.")
+                print("No se pudo guardar. Revise los permisos e intente la opción 13.")
                 continue
-        if opcion == "9":
+        if opcion == "13":
             print("Datos guardados. Hasta pronto.")
             break
 
 
 if __name__ == "__main__":
     main()
-

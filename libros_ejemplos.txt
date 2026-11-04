@@ -22,3 +22,4 @@
 1001|Inglés para universitarios|Autor de ejemplo 22|Estudiante 22|UNICA|Préstamo|0|||Idiomas
 1002|Didáctica general|Autor de ejemplo 23|Estudiante 23|UNAN-Managua|Venta|420|||Educación
 1101|Economía y sociedad|Autor de ejemplo 24|Estudiante 24|UAM|Intercambio|0|||Economía
+

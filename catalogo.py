@@ -13,6 +13,10 @@ class NodoLibro:
         self.carrera = carrera
         self.modalidad = modalidad
         self.precio = precio
+        self.estado = "Disponible"
+        self.destinatario = ""
+        self.universidad_destinatario = ""
+        self.codigo_intercambio = 0
         self.prestado_a = ""
         self.universidad_prestatario = ""
         self.cola = []
@@ -52,7 +56,7 @@ def quitar_libro(cabeza, codigo):
     return cabeza
 
 
-def publicar_libro(cabeza):
+def publicar_libro(cabeza, modalidad):
     codigo = leer_entero("Código del libro: ")
     if buscar_codigo(cabeza, codigo) is not None:
         print("Ese código ya existe.")
@@ -62,18 +66,9 @@ def publicar_libro(cabeza):
     propietario = leer_texto("Nombre del propietario: ")
     universidad = leer_texto("Universidad del propietario: ")
     carrera = leer_texto("Carrera o área del libro: ")
-    print("1. Venta   2. Intercambio   3. Préstamo")
-    opcion = input("Modalidad: ").strip()
-    while opcion not in ["1", "2", "3"]:
-        opcion = input("Seleccione 1, 2 o 3: ").strip()
     precio = 0
-    if opcion == "1":
-        modalidad = "Venta"
+    if modalidad == "Venta":
         precio = leer_entero("Precio en córdobas enteros: ")
-    elif opcion == "2":
-        modalidad = "Intercambio"
-    else:
-        modalidad = "Préstamo"
     nuevo = NodoLibro(codigo, titulo, autor, propietario, universidad,
                       modalidad, precio, carrera)
     cabeza = agregar_libro(cabeza, nuevo)
@@ -85,13 +80,19 @@ def mostrar_libro(libro):
     print("----------------------------------------")
     print("Código:", libro.codigo, "| Título:", libro.titulo)
     print("Autor:", libro.autor)
-    print("Propietario:", libro.propietario)
+    print("Publicado por:", libro.propietario)
     print("Universidad:", libro.universidad)
     print("Carrera:", libro.carrera)
     print("Modalidad:", libro.modalidad)
     if libro.modalidad == "Venta":
         print("Precio: C$", libro.precio)
-    if libro.prestado_a == "":
+    if libro.estado == "Vendido":
+        print("Estado: Vendido")
+        print("Comprador:", libro.destinatario, "| Universidad:", libro.universidad_destinatario)
+    elif libro.estado == "Intercambiado":
+        print("Estado: Intercambiado por el libro", libro.codigo_intercambio)
+        print("Entregado a:", libro.destinatario, "| Universidad:", libro.universidad_destinatario)
+    elif libro.prestado_a == "":
         print("Estado: Disponible")
     else:
         print("Prestado a:", libro.prestado_a,

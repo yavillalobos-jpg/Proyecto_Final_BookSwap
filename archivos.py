@@ -9,7 +9,9 @@ def guardar_datos(cabeza):
             campos = [str(actual.codigo), actual.titulo, actual.autor,
                       actual.propietario, actual.universidad, actual.modalidad,
                       str(actual.precio), actual.prestado_a,
-                      actual.universidad_prestatario, actual.carrera]
+                      actual.universidad_prestatario, actual.carrera, actual.estado,
+                      actual.destinatario, actual.universidad_destinatario,
+                      str(actual.codigo_intercambio)]
             archivo.write("|".join(campos) + "\n")
             actual = actual.siguiente
     with open("solicitudes.txt", "w", encoding="utf-8") as archivo:
@@ -40,6 +42,11 @@ def cargar_datos():
                 # También podemos leer los archivos de la versión anterior.
                 if len(campos) > 9:
                     nuevo.carrera = campos[9]
+                if len(campos) > 10:
+                    nuevo.estado = campos[10]
+                    nuevo.destinatario = campos[11]
+                    nuevo.universidad_destinatario = campos[12]
+                    nuevo.codigo_intercambio = int(campos[13])
                 cabeza = agregar_libro(cabeza, nuevo)
     except FileNotFoundError:
         # Si no existen datos guardados ni ejemplos, iniciamos sin libros.
