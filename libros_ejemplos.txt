@@ -1,0 +1,24 @@
+101|Fundamentos de programación|Autor de ejemplo 1|Estudiante 1|UAM|Préstamo|0|||Ingeniería en Sistemas
+102|Redes de computadoras|Autor de ejemplo 2|Estudiante 2|UNI|Venta|210|||Ingeniería en Computación
+103|Estructuras de datos en Python|Autor de ejemplo 3|Estudiante 3|UCN|Intercambio|0|||Ingeniería en Sistemas
+201|Anatomía humana|Autor de ejemplo 4|Estudiante 4|UNAN-Managua|Préstamo|0|||Medicina
+202|Fisiología humana|Autor de ejemplo 5|Estudiante 5|UNAN-León|Venta|240|||Medicina
+203|Fundamentos de enfermería|Autor de ejemplo 6|Estudiante 6|UCN|Intercambio|0|||Enfermería
+301|Materiales dentales|Autor de ejemplo 7|Estudiante 7|UAM|Préstamo|0|||Odontología
+302|Anatomía dental|Autor de ejemplo 8|Estudiante 8|UNAN-León|Venta|270|||Odontología
+401|Dibujo arquitectónico|Autor de ejemplo 9|Estudiante 9|UNI|Intercambio|0|||Arquitectura
+402|Diseño de espacios|Autor de ejemplo 10|Estudiante 10|UAM|Préstamo|0|||Arquitectura
+501|Resistencia de materiales|Autor de ejemplo 11|Estudiante 11|UNI|Venta|300|||Ingeniería Civil
+502|Topografía básica|Autor de ejemplo 12|Estudiante 12|UNAN-Managua|Intercambio|0|||Ingeniería Civil
+601|Principios de administración|Autor de ejemplo 13|Estudiante 13|UNICA|Préstamo|0|||Administración de Empresas
+602|Contabilidad financiera|Autor de ejemplo 14|Estudiante 14|UNAN-Managua|Venta|330|||Contabilidad
+603|Marketing digital|Autor de ejemplo 15|Estudiante 15|UAM|Intercambio|0|||Mercadotecnia
+701|Introducción al derecho|Autor de ejemplo 16|Estudiante 16|UNICA|Préstamo|0|||Derecho
+702|Derecho constitucional|Autor de ejemplo 17|Estudiante 17|UNAN-León|Venta|360|||Derecho
+801|Psicología del desarrollo|Autor de ejemplo 18|Estudiante 18|UNAN-Managua|Intercambio|0|||Psicología
+802|Psicología social|Autor de ejemplo 19|Estudiante 19|UCN|Préstamo|0|||Psicología
+901|Química general|Autor de ejemplo 20|Estudiante 20|UNAN-León|Venta|390|||Química
+902|Estadística aplicada|Autor de ejemplo 21|Estudiante 21|UNAN-Managua|Intercambio|0|||Estadística
+1001|Inglés para universitarios|Autor de ejemplo 22|Estudiante 22|UNICA|Préstamo|0|||Idiomas
+1002|Didáctica general|Autor de ejemplo 23|Estudiante 23|UNAN-Managua|Venta|420|||Educación
+1101|Economía y sociedad|Autor de ejemplo 24|Estudiante 24|UAM|Intercambio|0|||Economía

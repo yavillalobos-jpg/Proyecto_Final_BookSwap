@@ -1,0 +1,54 @@
+BOOKSWAP - CATÁLOGO DE DEMOSTRACIÓN
+
+1. Extraiga todo el ZIP en una carpeta.
+2. Abra esa carpeta en VS Code.
+3. En la terminal de esa carpeta ejecute: python main.py
+4. Use la opción 2 para mostrar los libros y la opción 3 para buscar.
+
+Todos los registros son ficticios: títulos de demostración, autores,
+propietarios, precios y asociaciones con universidades. No son inventarios
+oficiales ni una verificación de las carreras ofrecidas por cada universidad.
+
+Los códigos identifican publicaciones y no se pueden repetir.
+Para publicar otro libro, use un código libre (por ejemplo, 1201).
+La opción 1 publica un libro NUEVO; los ejemplos ya están registrados.
+La opción 4 solicita un libro cuya modalidad sea Préstamo.
+
+libros_ejemplo.txt solo se lee cuando no existe libros.txt.
+Al guardar, se crean libros.txt y solicitudes.txt con los datos actuales.
+Si ya tiene datos de la versión anterior, se conservan y no se mezclan
+con los ejemplos. Para probar este catálogo, use una carpeta nueva.
+No borre sus archivos de datos anteriores.
+
+MÓDULOS
+main.py: menú.
+catalogo.py: lista enlazada de libros, publicación y búsqueda.
+prestamos.py: cola FIFO y devoluciones.
+archivos.py: lectura y guardado en texto.
+entradas.py: lectura y validación de cadenas y números.
+
+CATÁLOGO (código | título | carrera | universidad | modalidad)
+101 | Fundamentos de programación | Ingeniería en Sistemas | UAM | Préstamo
+102 | Redes de computadoras | Ingeniería en Computación | UNI | Venta
+103 | Estructuras de datos en Python | Ingeniería en Sistemas | UCN | Intercambio
+201 | Anatomía humana | Medicina | UNAN-Managua | Préstamo
+202 | Fisiología humana | Medicina | UNAN-León | Venta
+203 | Fundamentos de enfermería | Enfermería | UCN | Intercambio
+301 | Materiales dentales | Odontología | UAM | Préstamo
+302 | Anatomía dental | Odontología | UNAN-León | Venta
+401 | Dibujo arquitectónico | Arquitectura | UNI | Intercambio
+402 | Diseño de espacios | Arquitectura | UAM | Préstamo
+501 | Resistencia de materiales | Ingeniería Civil | UNI | Venta
+502 | Topografía básica | Ingeniería Civil | UNAN-Managua | Intercambio
+601 | Principios de administración | Administración de Empresas | UNICA | Préstamo
+602 | Contabilidad financiera | Contabilidad | UNAN-Managua | Venta
+603 | Marketing digital | Mercadotecnia | UAM | Intercambio
+701 | Introducción al derecho | Derecho | UNICA | Préstamo
+702 | Derecho constitucional | Derecho | UNAN-León | Venta
+801 | Psicología del desarrollo | Psicología | UNAN-Managua | Intercambio
+802 | Psicología social | Psicología | UCN | Préstamo
+901 | Química general | Química | UNAN-León | Venta
+902 | Estadística aplicada | Estadística | UNAN-Managua | Intercambio
+1001 | Inglés para universitarios | Idiomas | UNICA | Préstamo
+1002 | Didáctica general | Educación | UNAN-Managua | Venta
+1101 | Economía y sociedad | Economía | UAM | Intercambio
